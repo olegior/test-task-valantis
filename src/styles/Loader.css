@@ -1,0 +1,41 @@
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.loader__logo {
+    background-image: url('../assets/val.svg');
+    object-fit: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 150px;
+    height: 150px;
+    animation: load 1.5s infinite linear;
+}
+
+@keyframes load {
+    0% {
+        transform: rotate(-10deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+
+    }
+
+    50% {
+        transform: rotate(-10deg);
+
+    }
+
+    75% {
+        transform: rotate(10deg);
+
+    }
+
+    100% {
+        transform: rotate(-10deg);
+    }
+}

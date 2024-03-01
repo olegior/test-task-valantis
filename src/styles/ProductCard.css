@@ -1,0 +1,38 @@
+.product-card {
+    border-color: pink;
+}
+
+.product-card__header {
+    height: 100px;
+}
+
+.product-card__title {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    text-wrap: balance;
+    font-size: 1rem;
+}
+
+.product-card__body {
+    margin-block: 15px;
+}
+
+.product-card__price {
+    color: rgb(160, 40, 56);
+    text-wrap: nowrap;
+    text-align: end;
+    font-size: 1rem;
+}
+
+.product-card__id {
+    text-align: center;
+    margin: 0;
+    height: 44px;
+}
+
+@media (max-width: 576px) {
+    .product-card__id, .product-card__header{
+        height: fit-content;
+    }
+}
