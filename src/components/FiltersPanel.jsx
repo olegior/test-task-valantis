@@ -16,7 +16,7 @@ export const FiltersPanel = ({ handleShowFilter, showFilter }) => {
         children: <SearchForm name='price' />
     },
     {
-        key: '4',
+        key: '3',
         label: 'Брэнды',
         children: <SelectBrands />,
     },]

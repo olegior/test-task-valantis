@@ -24,7 +24,7 @@ export const getData = async (action, params) => {
     }
     catch (error) {
         if (error.response.status == 500) {
-            console.log('Error:', error.response.data);
+            console.log('Error ID:', error.response.data);
         }
     }
 }

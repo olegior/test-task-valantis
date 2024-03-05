@@ -12,7 +12,8 @@ export const SelectBrands = () => {
     const [searchParams, setSearchParams] = useSearchParams()
     const dispatch = useDispatch();
     const { brands, filters } = useSelector(state => state.products)
-    const allBrands = brands.map(brand => ({ label: brand, value: brand }));
+    // const allBrands = brands.map(brand => ({ label: brand, value: brand }));
+    const allBrands = brands.map(brand => <Select.Option key={brand}>{brand}</Select.Option>);
 
     const handleSelectChange = (value) => {
         if (value) {
@@ -33,9 +34,16 @@ export const SelectBrands = () => {
 
         <Flex vertical justify="center" gap={20} >
             <Flex gap={20} vertical={true}>
-                <Select options={allBrands} showSearch onChange={handleSelectChange} allowClear
+                <Select
+                    // options={allBrands}
+                    showSearch onChange={handleSelectChange} allowClear
                     value={brands.includes(filters.brand) ? filters.brand : null}
-                    onClear={handleOnClear} />
+                    onClear={handleOnClear}
+
+                // />
+                >
+                    {allBrands}
+                </Select>
             </Flex>
         </Flex>
     )

@@ -10,7 +10,6 @@ export const Pagination = () => {
     const { filtered, data, totalLength, page } = useSelector(state => state.products);
     const dispatch = useDispatch();
 
-
     const total = filtered ? data.length : totalLength;
 
     const handlePageChange = (current) => {

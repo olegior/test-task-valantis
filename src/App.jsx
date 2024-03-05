@@ -12,27 +12,25 @@ import { dispatchByPage } from './helpers/dispatchByPage';
 
 function App() {
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
-  const { page, filtered, showFilter, filters } = useSelector(state => state.products)
+  const { page, filtered, showFilter } = useSelector(state => state.products)
   const dispatch = useDispatch();
 
   const handleShowFilter = () => {
     dispatch(changeShowFilter())
   }
 
-
   useEffect(() => {
     const filters = [...searchParams.keys()].filter(filter => filter !== 'page');
     if (filters?.length) {
       const key = filters[0];
-      const value = searchParams.get(key);
-      dispatch(setFilter({ [key]: key == 'price' ? +value : value }));
+      const value = key == 'price' ? +searchParams.get(key) : searchParams.get(key);
+      dispatch(setFilter({ [key]: value }));
       dispatcher(dispatch, searchProducts, { [key]: value })
     }
 
     if (searchParams.has('page')) {
-      console.log('sadasdas');
       dispatch(setPage(+searchParams.get('page')))
     }
 
@@ -40,17 +38,15 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (!Object.keys(filters).length)
-      if (!filtered) {
-        dispatchByPage(dispatch, page)
-      }
-  }, [page])
+    if (!filtered) {
+      dispatchByPage(dispatch, page)
+    }
+  }, [page, filtered])
 
 
   return (
     <Layout className='container'>
       <FiltersPanel showFilter={showFilter} handleShowFilter={handleShowFilter} />
-
       <Flex justify='space-between' align='center'
         style={{ paddingBlock: 20 }}    >
         <Button onClick={handleShowFilter}>Фильтры</Button>

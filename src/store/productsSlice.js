@@ -48,7 +48,7 @@ const productsSlice = createSlice({
         setFilter: (state, action) => {
             state.filters = action.payload;
             state.showFilter = false;
-            // state.filtered = true;
+            state.filtered = true;
             state.page = 1;
         },
         setPage: (state, action) => {

@@ -1,4 +1,6 @@
 import { Button, Tag } from 'antd'
+import {CloseOutlined} from '@ant-design/icons';
+
 
 export const FilterTag = ({ tag, handleCloseTag }) => {
     return (
@@ -10,7 +12,7 @@ export const FilterTag = ({ tag, handleCloseTag }) => {
                 backgroundColor: 'transparent'
             }}
             onClick={handleCloseTag} type='text' size='large'>
-            <Tag color="lime">{tag}</Tag>
+            <Tag color="gold"><CloseOutlined /> {tag}</Tag>
         </Button>
     )
 }
