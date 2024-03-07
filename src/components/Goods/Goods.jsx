@@ -1,14 +1,15 @@
 import { Layout, List, Spin, Image, Flex, Typography } from "antd"
-import { Loader } from './Loader'
+import { Loader } from '../Loader'
 import { useSelector } from 'react-redux'
 import { Card } from "./Card";
+import { Pagination } from "../Pagination";
+import { useEffect } from "react";
 
 const { Content } = Layout
 
-export const Products = () => {
+export const Goods = () => {
 
-    const { data, filtered, page, isLoading } = useSelector(store => store.products)
-    const showedData = (filtered || data.length > 50) ? data.slice((page - 1) * 50, page * 50) : data;
+    const { data, filtered, isLoading, page } = useSelector(store => store.goods);
 
     const grid = {
         column: 5,
@@ -21,22 +22,28 @@ export const Products = () => {
 
     const noData = <Flex justify="center" align="center" gap={20} vertical style={{ filter: 'grayscale(80%) opacity(0.1)' }} >
         <Image preview={false} src="val.svg" />
-        <Typography.Title >Ничего не найдено</Typography.Title>
+        <Typography.Title style={{ textAlign: 'center' }} >Ничего не найдено</Typography.Title>
     </Flex>
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [page])
 
     return (
         <Layout>
             <Content>
                 <Spin fullscreen spinning={isLoading} indicator={<Loader />} />
-                {!!showedData.length &&
+                {!!data?.length &&
                     <List
-                        dataSource={showedData}
+                        dataSource={data}
                         grid={grid}
-                        renderItem={(item) => <List.Item><Card item={item} /></List.Item>}
+                        renderItem={(item) => <List.Item>
+                            <Card item={item} />
+                        </List.Item>}
                     />
                 }
-
-                {filtered && !isLoading && !data.length && noData}
+                {filtered && !isLoading && !data?.length && noData}
+                {!isLoading && <Pagination />}
             </Content>
         </Layout>
     )

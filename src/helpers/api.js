@@ -18,9 +18,7 @@ const api = axios.create({
 export const getData = async (action, params) => {
     try {
         const response = await api.post('', { action, params })
-        if (response.status === 200)
-            return response.data.result;
-        return []
+        return response.data.result;
     }
     catch (error) {
         if (error.response.status == 500) {
@@ -29,16 +27,3 @@ export const getData = async (action, params) => {
     }
 }
 
-export const getUnique = (products) => {
-    const map = new Map();
-    const filtered = products.filter(product => {
-        const item = product?.id ? product.id : product;
-        if (item === null)
-            return false;
-        if (map.get(item))
-            return false;
-        map.set(item, item);
-        return true;
-    })
-    return filtered;
-}

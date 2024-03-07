@@ -6,35 +6,22 @@
 }
 
 .loader__logo {
-    background-image: url('../assets/val.svg');
-    object-fit: contain;
+    background-image: url('/val.svg');
     background-repeat: no-repeat;
     background-position: center;
     width: 150px;
     height: 150px;
-    animation: load 1.5s infinite linear;
+    animation: loading 0.6s infinite linear;
 }
 
-@keyframes load {
+@keyframes loading {
     0% {
         transform: rotate(-10deg);
     }
-
-    25% {
-        transform: rotate(10deg);
-
-    }
-
     50% {
-        transform: rotate(-10deg);
-
-    }
-
-    75% {
         transform: rotate(10deg);
 
     }
-
     100% {
         transform: rotate(-10deg);
     }
