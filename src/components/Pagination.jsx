@@ -30,6 +30,8 @@ export const Pagination = () => {
                 showSizeChanger={false}
                 showPrevNextJumpers
                 responsive
+                style={{ fontSize: '1.2rem' }}
+                hideOnSinglePage
                 onChange={handlePageChange}
             />
         </Flex>
