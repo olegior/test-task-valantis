@@ -33,7 +33,7 @@ export const SearchForm = ({ name }) => {
             allowClear
             size='large'
             onSearch={handleSearch}
-            value={filters[name]}
+            defaultValue={filters[name]}
             enterKeyHint='search'
         />
     )

@@ -84,7 +84,6 @@ const goodsSlice = createSlice({
         },
         setLoading: (state) => {
             state.isLoading = true;
-            console.log('loading ');
         },
         changeShowFilter: (state) => {
             state.showFilter = !state.showFilter;
