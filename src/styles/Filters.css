@@ -1,0 +1,15 @@
+.filters__panel {
+    flex-direction: row;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+
+@media (max-width: 576px) {
+    .filters__panel {
+        flex-direction: column;
+        padding-top: 0;
+    }
+
+}

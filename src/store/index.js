@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { productsReducer } from "./productsSlice";
+import { goodsReducer } from "./goodsSlice";
 
 export const store = configureStore({
     reducer: {
-        products: productsReducer,
+        goods: goodsReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production'

@@ -1,61 +1,43 @@
-import { Layout, Button, Flex, } from 'antd';
+import { Layout, Typography } from 'antd';
 import { useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeShowFilter, getInitial, searchProducts, setFilter, setPage } from './store/productsSlice';
-import { Products } from './components/Products';
-import { FiltersPanel } from './components/FiltersPanel';
-import { Pagination } from './components/Pagination';
-import { ActiveFilters } from './components/ActiveFilters';
-import { dispatcher } from './helpers/dispatcher';
+import { useDispatch } from 'react-redux';
+import { Goods } from './components/Goods/Goods';
+import { Filters } from './components/Filters/Filters';
+import { getInitial, resetGoodsSearch, searchGoods, setFilter, setPage } from './store/goodsSlice';
 import { dispatchByPage } from './helpers/dispatchByPage';
 
 function App() {
 
   const [searchParams] = useSearchParams();
-
-  const { page, filtered, showFilter } = useSelector(state => state.products)
   const dispatch = useDispatch();
 
-  const handleShowFilter = () => {
-    dispatch(changeShowFilter())
-  }
+  const page = searchParams.has('page') ? +searchParams.get('page') : 1
+  const filter = [...searchParams.keys()].find(filter => filter !== 'page');
+  const value = filter == 'price' ? +searchParams.get(filter) : searchParams.get(filter);
+  const payload = { [filter]: value };
 
   useEffect(() => {
-    const filters = [...searchParams.keys()].filter(filter => filter !== 'page');
-    if (filters?.length) {
-      const key = filters[0];
-      const value = key == 'price' ? +searchParams.get(key) : searchParams.get(key);
-      dispatch(setFilter({ [key]: value }));
-      dispatcher(dispatch, searchProducts, { [key]: value })
-    }
-
-    if (searchParams.has('page')) {
-      dispatch(setPage(+searchParams.get('page')))
-    }
-
-    dispatcher(dispatch, getInitial, null)
+    dispatch(setPage(page));
+    dispatch(getInitial())
   }, [])
 
   useEffect(() => {
-    if (!filtered) {
+    if (filter) {
+      dispatch(setFilter(payload));
+      dispatch(searchGoods(payload))
+    }
+    else {
+      dispatch(resetGoodsSearch());
       dispatchByPage(dispatch, page)
     }
-  }, [page, filtered])
-
+  }, [searchParams])
 
   return (
     <Layout className='container'>
-      <FiltersPanel showFilter={showFilter} handleShowFilter={handleShowFilter} />
-      <Flex justify='space-between' align='center'
-        style={{ paddingBlock: 20 }}    >
-        <Button onClick={handleShowFilter}>Фильтры</Button>
-        <ActiveFilters />
-      </Flex>
-      <Products />
-      <Flex justify='center'>
-        <Pagination />
-      </Flex>
+      <Typography.Title className='title-text'> Каталог ювелирных украшений</Typography.Title>
+      <Filters />
+      <Goods />
     </Layout>
   )
 }

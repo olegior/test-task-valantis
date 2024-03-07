@@ -1,14 +1,14 @@
-:root {
-  font-family: 'Open Sans', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'Open Sans';
+  src: local('Open Sans'), url('/fonts/OpenSans.woff2') format('woff2');
+  font-weight: 300 400 500 600 700 800;
 }
 
+@font-face {
+  font-family: 'TTFirsNeue';
+  src: local('TTFirsNeue'), url('/fonts/TTFirsNeue.woff2') format('woff2');
+  font-weight: 100 200 300 400 500 600 700 800 900;
+}
 
 body {
   margin: 0;
@@ -23,13 +23,14 @@ body {
   margin: 0 auto;
 }
 
-.filter-brands {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
+.title-text{
+  font-family: 'TTFirsNeue';
 }
 
-.filter-brands label {
-  font-size: 1rem;
-  margin-block: 2px;
+@media (max-width: 576px) {
+  .title-text.ant-typography {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 }
