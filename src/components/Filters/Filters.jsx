@@ -28,7 +28,7 @@ export const Filters = () => {
         },
         {
             key: '3',
-            label: 'Брэнды',
+            label: 'Бренды',
             children: <SelectBrands />,
         },
     ]
